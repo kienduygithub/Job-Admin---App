@@ -1,0 +1,131 @@
+<resources>
+    <string name="app_name">Việc làm</string>
+    <string name="on_boarding_heading">Tìm kiếm \nViệc làm \nTại đây!</string>
+    <string name="on_boarding_sub_heading">Khám phá tất cả các vai trò công việc thú vị nhất dựa trên sở thích và chuyên ngành học của bạn.</string>
+    <string name="login_fragment_heading">Chào mừng</string>
+    <string name="login_fragment_sub_heading">Hãy Đăng Nhập. Điền thông tin của bạn để ứng tuyển vào các công việc!</string>
+    <string name="signup_fragment_heading">Tạo Tài Khoản</string>
+    <string name="signup_fragment_sub_heading">Let’s Signup. Fill in your details to apply for jobs!</string>
+    <string name="forget_pass_fragment_sub_heading">To reset your password, you need your email or mobile number that can be authenticated</string>
+    <string name="email_fragment_heading">Check Your Email</string>
+    <string name="email_fragment_sub_heading">We have sent the reset password to the email address brandonelouis@gmial.com</string>
+    <string name="student_detail_fragment_heading">Thêm thông tin</string>
+    <string name="address_detail_fragment_heading">Thêm địa chỉ</string>
+    <string name="student_academic_fragment_heading">Thêm SGPI</string>
+    <string name="resume_fragment_heading">Thêm hồ sơ</string>
+    <string name="bottom_sheet_heading">Xóa File</string>
+    <string name="bottom_sheet_sub_heading">Bạn có chắc muốn xóa File này?</string>
+    <string name="fragment_mock_test_sub_heading">Các bài  thi</string>
+    <string name="field_test_conducted">Bài thì đã được thực hiện</string>
+
+    <string name="field_username">Tên người dùng</string>
+    <string name="field_email">Email</string>
+    <string name="field_password">Mật khẩu</string>
+    <string name="field_login">Đăng nhập</string>
+    <string name="field_signup">Đăng ký</string>
+    <string name="field_back_to_login">Quay lại đăng nhập</string>
+    <string name="field_open_email">Mở Email</string>
+    <string name="field_reset_password">Đặt lại mật khẩu</string>
+    <string name="field_forgot_password">Quên mật khẩu ?</string>
+
+    <string name="login_prompt">Bạn đã có tài khoản? Đăng nhập</string>
+    <string name="sign_up_prompt">Bạn chưa có tài khoản? Đăng ký</string>
+    <string name="email_resend_prompt">Bạn chưa nhận được? Gửi lại</string>
+
+    <string name="auth_pass">Đăng nhập thành công</string>
+    <string name="auth_fail">Đăng nhập thất bại</string>
+
+    <string name="field_error_username">Vui lòng nhập đúng tên tài khoản</string>
+    <string name="field_error_email">Vui lòng nhập đúng email</string>
+    <string name="field_error_password">Vui lòng nhập đúng mật khẩu</string>
+    <string name="reset_pass">Đặt lại mật khẩu thành công</string>
+    <string name="reset_fail">Đặt lại mật khẩu thất bại</string>
+
+    <string name="upload_image">Đăng tải hồ sơ</string>
+    <string name="field_sap_id">Sap ID</string>
+    <string name="field_mobile">Điện thoại</string>
+    <string name="field_gender">Giới tính</string>
+    <string name="field_dob">Ngày sinh</string>
+    <string name="field_next">Tiếp tục</string>
+    <string name="field_hint">Địa chỉ</string>
+    <string name="field_city">Thành phó</string>
+    <string name="field_state">Tỉnh</string>
+    <string name="zip_code">Mã Zip</string>
+    <string name="field_sem_1">Kì 1</string>
+    <string name="field_sem_2">Kì 2</string>
+    <string name="field_sem_3">Kì 3</string>
+    <string name="field_sem_4">Kì 4</string>
+    <string name="field_avg_sem">Trung bình SGPI</string>
+    <string name="field_company_and_location">%s \u2022 %s</string>
+    <string name="heading_student_applied">Sinh viên đăng ký</string>
+    <string name="student_count"> %s </string>
+    <string name="header_job_description">Mô tả công việc</string>
+    <string name="header_salary">Thu nhập</string>
+    <string name="header_responsibilities">Trách nhiệm</string>
+    <string name="header_skill_set">Kỹ năng yêu cầu</string>
+    <string name="header_all_jobs">Tất cả</string>
+    <string name="field_search">Tìm kiếm</string>
+    <string name="field_apply">Chấp nhận</string>
+    <string name="field_job_applied">Công việc đã được đăng ký</string>
+    <string name="field_question">Câu hỏi</string>
+    <string name="field_duration">Thời hạn</string>
+    <string name="field_instruction">Hướng dẫn</string>
+    <string name="field_navigation">Định vị</string>
+    <string name="field_start_test">Bắt đầu kiểm tra</string>
+    <string name="field_mock_duration">%sm</string>
+    <string name="field_duration_start">00:00</string>
+    <string name="field_tab_text">%d</string>
+    <string name="field_report_header">Báo cáo</string>
+    <string name="field_in_correct">Không chính xác</string>
+    <string name="field_un_attempted">Unattempted</string>
+    <string name="field_time_taken">Thời gian thực hiện</string>
+    <string name="field_solution">Giải pháp</string>
+    <string name="field_score">%s/%s</string>
+
+    <string name="menu_field_home">Trang chủ</string>
+    <string name="menu_field_alert">Thông báo</string>
+    <string name="menu_field_test">Tests</string>
+    <string name="menu_field_jobs">Công việc</string>
+
+    <string name="field_error_sap_id">Enter valid Sap Id</string>
+    <string name="field_error_mobile">Enter valid Mobile No.</string>
+    <string name="field_error_dob">Enter valid Date</string>
+    <string name="field_error_image">Please Select Image</string>
+    <string name="field_error_address">Enter valid Address</string>
+    <string name="field_error_city">Enter valid City</string>
+    <string name="field_error_state">Enter valid State</string>
+    <string name="field_error_zip_code">Enter valid Zip Code</string>
+    <string name="field_error_score">Enter valid Score</string>
+    <string name="field_error_job_applied">Job application failed</string>
+
+    <string name="resume_meta_data">%1$s Mb · %2$s</string>
+    <string name="resume_guideline">Upload files in PDF format up to 5 MB. Just upload it once and you can use it in your next application.</string>
+    <string name="bottom_sheet_button_text">Không</string>
+    <string name="button_submit_text">Nộp</string>
+    <string name="field_welcome_text">Xin chào \n%s</string>
+
+    <string name="home_fragment_field_status">Trạng thái</string>
+    <string name="home_fragment_field_companies">Công ty</string>
+    <string name="home_fragment_field_job_applied">Công việc đăng ký</string>
+    <string name="home_fragment_job_list">Danh sách công việc mới nhất</string>
+    <string name="field_value_count">%s!</string>
+
+    <string name="invalid_credentials">Invalid email or password</string>
+    <string name="invalid_user">The specified user does not exist</string>
+    <string name="network_error">A network error occurred</string>
+
+    <string name="loading">Đang tải</string>
+    <string name="completed">Hoàn thành</string>
+
+    <string-array name="gender">
+        <item>Nam</item>
+        <item>Nữ</item>
+        <item>Khác</item>
+    </string-array>
+
+    <string name="mock_test_instructions">1. Test will be auto submitted when the time is up.\n\n2. The comprises of multiple choice questions (MCQ) with one correct answer.\n\n3. The clock in the top right corner will display the remaining time available for you to complete the test.</string>
+    <string name="mock_test_navigation">1. Select the option and the answer will be saved once you click on the submit button.\n\n2. Once you click on the submit button, you cannot change the answer and the solution will be displayed on the bottom.\n\n3. To go onto the next question, slide towards left.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

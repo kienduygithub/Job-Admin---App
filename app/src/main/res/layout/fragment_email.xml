@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    tools:context=".auth.fragment.EmailFragment">
+
+    <TextView
+        android:id="@+id/tvEmailHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large_margin"
+        android:fontFamily="@font/dm_sans_bold"
+        android:text="@string/email_fragment_heading"
+        android:textAlignment="center"
+        android:textColor="@color/text_color"
+        android:textSize="32sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEmailSubHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:fontFamily="@font/dm_sans_regular"
+        android:padding="@dimen/small_padding"
+        android:text="@string/email_fragment_sub_heading"
+        android:textAlignment="center"
+        android:textColor="@color/subheading_color"
+        app:layout_constraintLeft_toLeftOf="@+id/tvEmailHeading"
+        app:layout_constraintRight_toRightOf="@+id/tvEmailHeading"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailHeading" />
+
+    <LinearLayout
+        android:id="@+id/EmailContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra_large_margin"
+        android:orientation="vertical"
+        android:padding="@dimen/medium_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailSubHeading">
+
+        <ImageView
+            android:id="@+id/ivForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:padding="@dimen/medium_padding"
+            android:src="@drawable/ic_check_email" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/otpET1"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/otpET2"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/otpET3"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/otpET4"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:maxLength="1"/>
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOpenEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:backgroundTint="@color/button_color"
+            android:fontFamily="@font/dm_sans_medium"
+            android:padding="@dimen/button_padding"
+            android:text="@string/field_authenticate"
+            android:textColor="@color/button_text_color"
+            android:textSize="16sp"
+            app:cornerRadius="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBackToLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/medium_margin"
+            android:layout_marginVertical="@dimen/extra_small_margin"
+            android:backgroundTint="@color/button_tint_color"
+            android:fontFamily="@font/dm_sans_medium"
+            android:padding="@dimen/button_padding"
+            android:text="@string/field_back_to_login"
+            android:textColor="@color/button_tint_text_color"
+            android:textSize="16sp"
+            app:cornerRadius="6dp"
+            app:strokeColor="@color/button_tint_border_color"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:id="@+id/tvEmailResend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/not_receive_otp"
+            android:textColor="@color/text_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvResendOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/resend"
+            android:textColor="@color/on_boarding_span_text_color"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

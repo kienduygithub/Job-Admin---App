@@ -1,0 +1,160 @@
+<resources>
+    <string name="app_name">Việc làm</string>
+    <string name="on_boarding_heading">Cung cấp \nCông việc mong đợi \nCác cơ hội!</string>
+    <string name="on_boarding_sub_heading">Hỗ trợ sinh viên tìm được những vai trò công việc thú vị nhất dựa trên sở thích và chuyên ngành học của bản thân.</string>
+
+    <string name="role_select_heading">Lựa chọn vai trò</string>
+    <string name="role_select_sub_heading">Giúp sinh viên sẵn sàng cho cuộc sống, không chỉ sẵn sàng cho ngành nghề. </string>
+    <string name="role_admin_heading">Admin</string>
+    <string name="role_tpo_heading">Tpo</string>
+
+    <string name="login_fragment_heading">Chào mừng quay lại</string>
+    <string name="login_fragment_sub_heading">Hãy đăng nhập. Điền thông tin của bạn để ứng tuyển công việc!</string>
+    <string name="signup_fragment_heading">Khởi tạo tài khoản</string>
+    <string name="signup_fragment_sub_heading">Hãy đăng ký. Điền thông tin của bạn để ứng tuyển công việc!</string>
+    <string name="forget_pass_fragment_sub_heading">Để đặt lại mật khẩu, bạn cần email hoặc số điện thoại có thể xác thực.</string>
+    <string name="email_fragment_heading">Kiểm tra email</string>
+    <string name="email_fragment_sub_heading">Chúng tôi đã gửi mật khẩu đặt lại đến địa chỉ email buikienduy2020@gmail.com.</string>
+    <string name="student_detail_fragment_heading">Thêm thông tin</string>
+    <string name="fragment_jobs_heading">Công việc</string>
+    <string name="fragment_jobs_record_heading">Thông tin</string>
+    <string name="fragment_job_detail_heading">Thêm công việc</string>
+    <string name="bottom_sheet_heading">Xóa công việc</string>
+    <string name="bottom_sheet_sub_heading">Bạn có chắc muốn xóa công việc này?</string>
+    <string name="fragment_mock_test_heading">Tạo bài thi thử</string>
+    <string name="fragment_mock_test_sub_heading">Bài thi thử</string>
+    <string name="field_test_conducted">Bài thi đã được thực hiện</string>
+
+
+    <string name="upload_image">Tải ảnh</string>
+    <string name="field_username">Tên người dùng</string>
+    <string name="field_email">Email</string>
+    <string name="field_password">Mật khẩu</string>
+    <string name="field_login">Đăng nhập</string>
+    <string name="field_signup">Đăng ký</string>
+    <string name="field_back_to_login">Quay lại đăng nhập</string>
+    <string name="field_open_email">Mở email của bạn</string>
+    <string name="field_reset_password">Đặt lại mật khẩu</string>
+    <string name="field_forgot_password">Quên mật khẩu?</string>
+    <string name="field_tpo_id">TPO ID</string>
+    <string name="field_mobile">Điện thoại</string>
+    <string name="field_gender">Giới tính</string>
+    <string name="field_dob">Ngày sinh</string>
+    <string name="field_next">Tiếp tục</string>
+    <string name="field_qualification">Trình độ</string>
+    <string name="field_of_study">Ngành học</string>
+    <string name="field_year_experience">Kinh nghiệm</string>
+    <string name="field_bio">Tiểu sự</string>
+    <string name="field_submit">Nộp</string>
+    <string name="field_search">Tìm kiếm</string>
+    <string name="field_upload_company_image">Tải ảnh</string>
+    <string name="field_job_title">Tiêu đề</string>
+    <string name="field_company_name">Tên công ty</string>
+    <string name="field_city">Thành phố</string>
+    <string name="field_salary">Thu nhập</string>
+    <string name="field_work_type">Loại công việc</string>
+    <string name="field_job_description">Mô tả công việc</string>
+    <string name="field_job_responsibilities">Yêu cầu công việc</string>
+    <string name="field_skills">Kỹ năng</string>
+    <string name="bottom_sheet_button_text">Không</string>
+    <string name="button_submit_text">Có</string>
+    <string name="field_role">%s</string>
+    <string name="field_company_and_location">\u2022 %s \u2022 %s \u2022</string>
+    <string name="field_welcome_heading">%s \n%s</string>
+    <string name="field_administer_heading">Quản trị viên</string>
+    <string name="field_student_card_title">Học sinh</string>
+    <string name="field_jobs_card_title">Công việc</string>
+    <string name="field_mock_test_card_title">Bài thi thử</string>
+    <string name="field_alert_card_title">Cảnh báo</string>
+    <string name="field_quiz_title">Tiêu đề câu hỏi</string>
+    <string name="question_count">Câu hỏi %d</string>
+    <string name="field_remove_mock_heading">Xóa bài thi thử</string>
+    <string name="field_remove_quiz_sub_heading">Bạn có chắc muốn xóa bài thi thử này không?</string>
+    <string name="field_remove_quiz_btn">Xóa bài thi thử</string>
+    <string name="field_quiz_student_count"> %d người đăng ký</string>
+
+    <string name="heading_student_applied">Sinh viên ứng tuyển</string>
+    <string name="student_count"> %s </string>
+    <string name="header_job_description">Mô tả công việc</string>
+    <string name="header_salary">Thu nhập</string>
+    <string name="header_responsibilities">Yêu cầu</string>
+    <string name="header_skill_set">Kỹ năng yêu cầu</string>
+
+    <string name="login_prompt">Đã có tài khoản? Đăng nhập</string>
+    <string name="sign_up_prompt">Bạn chưa có tài khoản? Đăng ký</string>
+    <string name="email_resend_prompt">Bạn chưa nhận được email? Gửi lại</string>
+
+    <string name="auth_pass">Xác thực thành công</string>
+    <string name="auth_fail">Xác thực thất bại</string>
+    <string name="move_to_login">Bạn có thể đăng nhập ngay bây giờ</string>
+
+
+    <string name="field_error_username">Điền đúng tên tài khoản</string>
+    <string name="field_error_email">Điền đúng email ID</string>
+    <string name="field_error_password">Điền đúng mật khẩu</string>
+    <string name="field_error_mobile">Điền đúng số điện thoại</string>
+    <string name="field_error_dob">Điền đúng ngày sinh</string>
+    <string name="field_error_image">Vui lòng chọn ảnh</string>
+    <string name="field_error_year">Điền đúng kinh nghiệm</string>
+    <string name="field_error_bio">Điền đúng tiểu sử</string>
+    <string name="field_error_stream">Điền đúng ngành học</string>
+    <string name="reset_pass">Tạo lại mật khẩu thành công</string>
+    <string name="field_error_job_title">Điền đúng tiêu đề công việc</string>
+    <string name="field_error_company_name">Điền đúng tên công ty</string>
+    <string name="field_error_city">Điền đúng thành phố</string>
+    <string name="field_error_salary">Điền đúng thu nhập</string>
+    <string name="field_error_description">Điền đúng mô tả</string>
+
+    <string name="reset_fail">Tạo lại mật khẩu thất bại</string>
+    <string name="invalid_credentials">Thông tin đăng nhập không chính xác</string>
+    <string name="invalid_user">TPO không tồn tại</string>
+    <string name="network_error">Đã xảy ra lỗi mạng</string>
+    <string name="email_exists">"Email đã tồn tại"</string>
+
+    <string name="student_address"> %s, %s:%s </string>
+
+
+    <string name="loading">Đang tải</string>
+    <string name="completed">Hoàn thành</string>
+    <string-array name="gender">
+        <item>Nam</item>
+        <item>Nữ</item>
+        <item>Khác</item>
+    </string-array>
+
+    <string-array name="qualification">
+        <item>Cử nhân</item>
+        <item>Chứng chỉ</item>
+        <item>Thạc sĩ</item>
+        <item>Tiến sĩ</item>
+        <item>Chứng chỉ chuyên môn</item>
+    </string-array>
+
+    <string-array name="workType">
+        <item>Thực tập</item>
+        <item>Bán thời gian</item>
+        <item>Toàn thời gian</item>
+    </string-array>
+
+    <string-array name="correctAns">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
+
+    <string-array name="designation">
+        <item>Hỗ trợ</item>
+        <item>Tư vấn</item>
+        <item>Thiết kế</item>
+        <item>Lập trình</item>
+        <item>Tester</item>
+        <item>HR</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="field_authenticate">Xác thực</string>
+    <string name="not_receive_otp">Bạn chưa nhận được mã OTP?</string>
+    <string name="resend">Gửi lại</string>
+
+</resources>

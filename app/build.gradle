@@ -60,6 +60,7 @@ dependencies {
     implementation libs.android.mail
     implementation libs.android.activation
 
+
     def splash_screen_version="1.0.0"
     def nav_version = "2.5.3"
     def circular_iv_version="3.1.0"

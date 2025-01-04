@@ -1,12 +1,15 @@
 package com.example.myapplication.home.fragment.profileFragment.viewmodel
 
 import android.net.Uri
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.Tpo
+import com.example.myapplication.util.AesService
 import com.example.myapplication.util.Constants
 import com.example.myapplication.util.Constants.Companion.COLLECTION_PATH_TPO
 import com.example.myapplication.util.Constants.Companion.TPO_IMAGE_STORAGE_PATH
@@ -27,7 +30,7 @@ class ProfileViewModel : ViewModel() {
     private val mStorage: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private var imageUri: Uri? = null
-
+    private val aesService: AesService = AesService()
     fun setImageUri(imageUri: Uri) {
         this.imageUri = imageUri
     }
@@ -54,6 +57,7 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updateUser(tpo: Tpo) {
        try {
            viewModelScope.launch(IO) {
@@ -78,6 +82,8 @@ class ProfileViewModel : ViewModel() {
                }
 
                val editUserRef = mFirestore.collection(COLLECTION_PATH_TPO).document(tpo.uid)
+               tpo.username = aesService.encryptFieldData(tpo.username)
+               tpo.mobile = aesService.encryptFieldData(tpo.mobile)
                editUserRef.set(tpo).await()
 
                _updateStatus.postValue(UiState.SUCCESS)

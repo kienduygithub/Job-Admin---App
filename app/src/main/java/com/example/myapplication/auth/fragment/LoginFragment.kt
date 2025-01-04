@@ -1,15 +1,18 @@
 package com.example.myapplication.auth.fragment
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +21,7 @@ import com.example.myapplication.R
 import com.example.myapplication.auth.viewmodel.AuthViewModel
 import com.example.myapplication.databinding.FragmentLoginBinding
 import com.example.myapplication.home.HomeActivity
+import com.example.myapplication.util.AesService
 import com.example.myapplication.util.InputValidation
 import com.example.myapplication.util.LoadingDialog
 import com.example.myapplication.util.addTextWatcher
@@ -36,6 +40,7 @@ class LoginFragment : Fragment() {
     private val args by navArgs<LoginFragmentArgs>()
     private val authViewModel by viewModels<AuthViewModel>()
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
+    private val aesService: AesService = AesService()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +54,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupUI() {
         with(binding) {
             tvSignup.text = createSignupText()
@@ -60,6 +66,7 @@ class LoginFragment : Fragment() {
             }
             etEmailContainer.addTextWatcher()
             etPasswordContainer.addTextWatcher()
+
             btnLogin.setOnClickListener {
                 val email = etEmail.getInputValue()
                 val password = etPassword.getInputValue()

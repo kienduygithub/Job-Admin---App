@@ -3,12 +3,14 @@ package com.example.myapplication.home.fragment.profileFragment
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,6 +37,7 @@ class ProfileEditFragment : Fragment() {
         }
     private val profileViewModel by viewModels<ProfileViewModel>()
     private val loadingDialog by lazy { LoadingDialog(requireContext()) }
+    private val aesService: AesService = AesService()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,12 +47,13 @@ class ProfileEditFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupUI() {
         with(binding) {
             profileImage.load(args.tpo.imageUri)
-            etUsername.setText(args.tpo.username)
+            etUsername.setText(aesService.decryptFieldData(args.tpo.username))
             etEmail.setText(args.tpo.email)
-            etMobile.setText(args.tpo.mobile)
+            etMobile.setText(aesService.decryptFieldData(args.tpo.mobile))
 
             if (profileViewModel.getImageUri() != null) {
                 profileImage.setImageURI(profileViewModel.getImageUri())

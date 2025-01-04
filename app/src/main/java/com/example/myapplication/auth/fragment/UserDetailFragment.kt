@@ -42,7 +42,7 @@ class UserDetailFragment : Fragment() {
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
     private var gender: String = ""
     private var qualification: String = ""
-
+    private val aesService: AesService = AesService()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -115,14 +115,14 @@ class UserDetailFragment : Fragment() {
                     experience = df.format(experience.toDouble())
                     val tpo = Tpo(
                         email = args.email,
-                        username = args.username,
-                        mobile = mobile,
-                        dob = dob,
-                        gender = gender,
-                        stream = stream,
-                        qualification = qualification,
-                        experience = experience,
-                        biography = bio,
+                        username = aesService.encryptFieldData(args.username),
+                        mobile = aesService.encryptFieldData(mobile),
+                        dob = aesService.encryptFieldData(dob),
+                        gender = aesService.encryptFieldData(gender),
+                        stream = aesService.encryptFieldData(stream),
+                        qualification = aesService.encryptFieldData(qualification),
+                        experience = aesService.encryptFieldData(experience),
+                        biography = aesService.encryptFieldData(bio),
                     )
                     userDetailViewModel.uploadUserDetail(imageUri!!, tpo)
                 }

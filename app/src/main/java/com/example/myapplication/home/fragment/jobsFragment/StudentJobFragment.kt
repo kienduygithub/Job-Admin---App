@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +16,15 @@ import com.example.myapplication.databinding.FragmentStudentJobBinding
 import com.example.myapplication.home.fragment.jobsFragment.adapter.EvaluationStudentAdapter
 import com.example.myapplication.home.fragment.jobsFragment.adapter.PendingStudentAdapter
 import com.example.myapplication.home.fragment.jobsFragment.viewmodel.StudentJobViewModel
+import com.example.myapplication.home.fragment.studentFragment.StudentFragmentDirections
 import com.example.myapplication.model.JobApplication
 import com.example.myapplication.model.JobStatus
+import com.example.myapplication.model.Student
+import com.example.myapplication.util.AesService
+import com.example.myapplication.util.Constants.Companion.RESUME_PATH
+import com.example.myapplication.util.LoadingDialog
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.tasks.await
 
 private const val TAG = "StudentJobFragment"
 
@@ -25,6 +33,7 @@ class StudentJobFragment : Fragment() {
     private val binding get() = _binding!!
     private val args by navArgs<StudentJobFragmentArgs>()
     private val studentJobViewModel by viewModels<StudentJobViewModel>()
+    private val loadingDialog by lazy { LoadingDialog(requireContext()) }
     private var _pendingStudentAdapter: PendingStudentAdapter? = null
     private val pendingStudentAdapter get() = _pendingStudentAdapter!!
     private var _evaluationStudentAdapter: EvaluationStudentAdapter? = null
@@ -32,13 +41,15 @@ class StudentJobFragment : Fragment() {
 
     private val pendingStudents: MutableList<JobStatus> by lazy { mutableListOf() }
     private val evaluatedStudents: MutableList<JobStatus> by lazy { mutableListOf() }
+    private val aesService: AesService = AesService()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentStudentJobBinding.inflate(layoutInflater)
-        _pendingStudentAdapter = PendingStudentAdapter(::setJobStatus)
-        _evaluationStudentAdapter = EvaluationStudentAdapter()
+        _pendingStudentAdapter = PendingStudentAdapter(::setJobStatus, this@StudentJobFragment)
+        _evaluationStudentAdapter = EvaluationStudentAdapter(this@StudentJobFragment)
 
         setupUI()
         setupObserver()
@@ -111,6 +122,25 @@ class StudentJobFragment : Fragment() {
 
     private fun setJobStatus(jobApplication: JobApplication) {
         studentJobViewModel.setSelectionStatus(jobApplication)
+    }
+
+    fun navigateToStudentView(student: Student) {
+        lifecycleScope.launchWhenResumed {
+            loadingDialog.show()
+            val resumeRef = FirebaseStorage.getInstance().reference.child(RESUME_PATH)
+                .child(student.uid.toString())
+            val metadata = resumeRef.metadata.await()
+            val fileName = metadata.getCustomMetadata("fileName") ?: ""
+            val fileMetadata = metadata.getCustomMetadata("fileMetaData") ?: ""
+            val direction = StudentJobFragmentDirections.actionStudentJobFragmentToStudentViewFragment(
+                student = student,
+                fileName = fileName,
+                fileMetaData = fileMetadata
+            )
+
+            findNavController().navigate(direction)
+            loadingDialog.dismiss()
+        }
     }
 
     override fun onDestroyView() {

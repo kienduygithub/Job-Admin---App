@@ -82,6 +82,9 @@
         <argument
             android:name="jobId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_studentJobFragment_to_studentViewFragment"
+            app:destination="@id/studentViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/jobEditFragment"

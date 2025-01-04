@@ -1,10 +1,12 @@
 package com.example.myapplication.home.fragment.studentFragment
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +18,7 @@ import com.example.myapplication.databinding.BottomSheetDeleteStudentBinding
 import com.example.myapplication.databinding.FragmentStudentBinding
 import com.example.myapplication.home.fragment.studentFragment.adapter.StudentAdapter
 import com.example.myapplication.model.Student
+import com.example.myapplication.util.AesService
 import com.example.myapplication.util.Constants.Companion.RESUME_PATH
 import com.example.myapplication.util.LoadingDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -31,7 +34,9 @@ class StudentFragment : Fragment() {
     private val studentViewModel by viewModels<StudentViewModel>()
     private val students: MutableList<Student> = mutableListOf()
     private val loadingDialog by lazy { LoadingDialog(requireContext()) }
+    private val aesService: AesService = AesService()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +50,7 @@ class StudentFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupUI() {
         studentViewModel.fetchStudents()
         with(binding) {
@@ -61,10 +67,11 @@ class StudentFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun filterStudents(text: Editable?) {
         if (!text.isNullOrEmpty()) {
             val filteredStudent = students.filter { student ->
-                val username = student.details?.username?.lowercase()!!
+                val username = aesService.decryptFieldData(student.details?.username.toString()).lowercase()!!
                 val inputText = text.toString().lowercase()
                 username.contains(inputText)
             }

@@ -1,7 +1,9 @@
 package com.example.jobapp_u.home.adapter
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.jobapp_u.databinding.TpoCardLayoutBinding
@@ -14,6 +16,7 @@ class TpoAdapter : RecyclerView.Adapter<TpoAdapter.TpoViewHolder>() {
     inner class TpoViewHolder(
         private val binding: TpoCardLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(tpo: Tpo) {
             binding.ivProfileTpo.load(tpo.imageUri)
             binding.tvTpoName.text = tpo.username
@@ -30,6 +33,7 @@ class TpoAdapter : RecyclerView.Adapter<TpoAdapter.TpoViewHolder>() {
         return TpoViewHolder(binding)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TpoViewHolder, position: Int) {
         holder.bind(tpoList[position])
     }

@@ -1,11 +1,13 @@
 package com.example.jobapp_u.user_detail.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.jobapp_u.databinding.FragmentStudentAddressBinding
@@ -13,6 +15,7 @@ import com.example.jobapp_u.util.InputValidation
 import com.example.jobapp_u.util.addTextWatcher
 import com.example.jobapp_u.model.Address
 import com.example.jobapp_u.model.Student
+import com.example.jobapp_u.util.AesService
 import com.example.jobapp_u.util.getInputValue
 
 private const val TAG = "StudentAddressFragment"
@@ -21,6 +24,7 @@ class StudentAddressFragment : Fragment() {
     private var _binding: FragmentStudentAddressBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<StudentAddressFragmentArgs>()
+    private val aesService: AesService = AesService()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,6 +36,7 @@ class StudentAddressFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupUI() {
         binding.apply {
             ivPopOut.setOnClickListener {
@@ -53,10 +58,10 @@ class StudentAddressFragment : Fragment() {
                 if(detailVerification(addressOne, city, state, zipCode)){
                     Log.d(TAG, "$finalAddress ,$city ,$state, $zipCode")
                     val address = Address(
-                        address = finalAddress,
-                        city = city,
-                        state = state,
-                        zipCode = zipCode
+                        address = aesService.encryptFieldData(finalAddress),
+                        city = aesService.encryptFieldData(city),
+                        state = aesService.encryptFieldData(state),
+                        zipCode = aesService.encryptFieldData(zipCode)
                     )
                     args.student.address = address
                     val student = args.student

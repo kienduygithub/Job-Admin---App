@@ -25,6 +25,7 @@ import com.example.jobapp_u.home.activity.UserActivity
 import com.example.jobapp_u.home.adapter.JobListAdapter
 import com.example.jobapp_u.home.viewmodel.HomeViewModel
 import com.example.jobapp_u.model.Job
+import com.example.jobapp_u.util.AesService
 import com.example.jobapp_u.util.Status
 import com.example.jobapp_u.util.counterAnimation
 import com.example.jobapp_u.util.getGreeting
@@ -42,6 +43,8 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel by viewModels<HomeViewModel>()
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val aesService: AesService = AesService()
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,7 +71,11 @@ class HomeFragment : Fragment() {
             //chỉ chạy khi fragment là started
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    val username = mAuth.currentUser?.displayName!!
+                    val username = if(aesService.isDecryptionSuccessful(mAuth.currentUser?.displayName!!)){
+                        aesService.decryptFieldData(mAuth.currentUser?.displayName!!)
+                    }else{
+                        mAuth.currentUser?.displayName!!
+                    }
                     tvWelcomeHeading.text = createGreetingText(username.replaceFirstChar { it.uppercase() })
                     ivProfileImage.load(mAuth.currentUser?.photoUrl)
                 }

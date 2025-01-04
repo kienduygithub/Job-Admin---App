@@ -1,16 +1,19 @@
 package com.example.jobapp_u.user_detail.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.jobapp_u.databinding.FragmentStudentAcademicBinding
 import com.example.jobapp_u.model.Academic
 import com.example.jobapp_u.model.Student
+import com.example.jobapp_u.util.AesService
 import com.example.jobapp_u.util.InputValidation
 import com.example.jobapp_u.util.addTextWatcher
 import com.example.jobapp_u.util.getInputValue
@@ -21,6 +24,7 @@ class StudentAcademicFragment : Fragment() {
     private var _binding: FragmentStudentAcademicBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<StudentAcademicFragmentArgs>()
+    private val aesService: AesService = AesService()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,6 +36,7 @@ class StudentAcademicFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupView() {
         binding.apply {
             ivPopOut.setOnClickListener {
@@ -57,11 +62,11 @@ class StudentAcademicFragment : Fragment() {
                     sem4 = df.format(sem4.toDouble())
                     avgScore = df.format(avgScore.toDouble())
                     val academic = Academic(
-                        sem1 = sem1,
-                        sem2 = sem2,
-                        sem3 = sem3,
-                        sem4 = sem4,
-                        avgScore = avgScore,
+                        sem1 = aesService.encryptFieldData(sem1),
+                        sem2 = aesService.encryptFieldData(sem2),
+                        sem3 = aesService.encryptFieldData(sem3),
+                        sem4 = aesService.encryptFieldData(sem4),
+                        avgScore = aesService.encryptFieldData(avgScore),
                     )
                     args.student.academic = academic
                     val student = args.student

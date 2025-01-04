@@ -3,6 +3,7 @@ package com.example.jobapp_u.home.fragments.userFragment
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,6 +37,9 @@ class UserEditFragment : Fragment() {
         }
     private val userEditViewModel by viewModels<UserEditViewModel>()
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
+    private val aesService: AesService = AesService()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,14 +52,15 @@ class UserEditFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupUI() {
         binding.apply {
             val studentDetails = args.student.details!!
-            profileImage.load(studentDetails.imageUrl)
-            etUsername.setText(studentDetails.username)
+            profileImage.load(aesService.decryptFieldData(studentDetails.imageUrl))
+            etUsername.setText(aesService.decryptFieldData(studentDetails.username))
             etEmail.setText(studentDetails.email)
-            etSapId.setText(studentDetails.sapId)
-            etMobile.setText(studentDetails.mobile)
+            etSapId.setText(aesService.decryptFieldData(studentDetails.sapId))
+            etMobile.setText(aesService.decryptFieldData(studentDetails.mobile))
 
             ivPopOut.setOnClickListener {
                 findNavController().popBackStack()
@@ -84,7 +90,7 @@ class UserEditFragment : Fragment() {
                 val email = etEmail.getInputValue()
                 val sapId = etSapId.getInputValue()
                 val mobile = etMobile.getInputValue()
-                val imageUrl = userEditViewModel.getImageUri() ?: Uri.parse(args.student.details?.imageUrl)
+                val imageUrl = userEditViewModel.getImageUri() ?: Uri.parse(aesService.decryptFieldData(args.student.details?.imageUrl.toString()))
 
                 if (detailVerification(imageUrl, username, email, sapId, mobile)) {
                     studentDetails.username = username

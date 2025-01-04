@@ -1,7 +1,9 @@
 package com.example.jobapp_u.home.viewmodel
 
 import android.net.Uri
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +17,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.example.jobapp_u.model.Student
 import com.example.jobapp_u.model.Tpo
+import com.example.jobapp_u.util.AesService
 import com.example.jobapp_u.util.Constants.Companion.COLLECTION_PATH_COMPANY
 import com.example.jobapp_u.util.Constants.Companion.COLLECTION_PATH_MOCK
 import com.example.jobapp_u.util.Constants.Companion.COLLECTION_PATH_MOCK_RESULT
@@ -39,6 +42,8 @@ class UserEditViewModel : ViewModel() {
     private val mFirestore: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private val mRealtimeDb: DatabaseReference by lazy { FirebaseDatabase.getInstance().reference }
     private var tpoListener : ListenerRegistration? = null
+
+    private val aesService: AesService = AesService()
 
     private var imageUri: Uri? = null
 
@@ -113,6 +118,7 @@ class UserEditViewModel : ViewModel() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updateStudent(student: Student) {
         viewModelScope.launch(IO) {
             try {
@@ -139,6 +145,11 @@ class UserEditViewModel : ViewModel() {
                 if ((currentUserEmail != student.details!!.email)){
                     currentUser.updateEmail(student.details!!.email).await()
                 }
+                studentDetail.imageUrl = aesService.encryptFieldData(studentDetail.imageUrl)
+                studentDetail.username = aesService.encryptFieldData(studentDetail.username)
+                studentDetail.email = studentDetail.email
+                studentDetail.sapId = aesService.encryptFieldData(studentDetail.sapId)
+                studentDetail.mobile = aesService.encryptFieldData(studentDetail.mobile)
                 val editStudentRef = mFirestore.collection(COLLECTION_PATH_STUDENT).document(studentId)
                 editStudentRef.set(student).await()
                 _updateState.postValue(Resource.success("Student update success."))

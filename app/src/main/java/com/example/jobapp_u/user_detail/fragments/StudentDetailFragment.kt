@@ -23,6 +23,7 @@ import com.example.jobapp_u.databinding.FragmentStudentDetailBinding
 import com.example.jobapp_u.model.Details
 import com.example.jobapp_u.model.Student
 import com.example.jobapp_u.user_detail.viewmodel.UserDetailViewModel
+import com.example.jobapp_u.util.AesService
 import com.example.jobapp_u.util.InputValidation
 import com.example.jobapp_u.util.addTextWatcher
 import com.example.jobapp_u.util.getInputValue
@@ -45,7 +46,7 @@ class StudentDetailFragment : Fragment() {
     private var username: String = ""
     private var email: String = ""
     private var gender: String = ""
-
+    private val aesService: AesService = AesService()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,13 +110,13 @@ class StudentDetailFragment : Fragment() {
                 val uid = mAuth.currentUser?.uid
                 if (detailVerification(sapId, mobile, dob, gender, imageUri)) {
                     val detail = Details(
-                        username = username,
+                        username = aesService.encryptFieldData(username),
                         email = email,
-                        sapId = sapId,
+                        sapId = aesService.encryptFieldData(sapId),
                         imageUrl = imageUri.toString(),
-                        mobile = mobile,
-                        dob = dob,
-                        gender = gender
+                        mobile = aesService.encryptFieldData(mobile),
+                        dob = aesService.encryptFieldData(dob),
+                        gender = aesService.encryptFieldData(gender)
                     )
                     val student = Student(uid = uid, details = detail)
                     Log.d(TAG, "Student : $student")

@@ -1,16 +1,21 @@
 package com.example.jobapp_u.home.fragments.userFragment
 
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jobapp_u.databinding.FragmentUserTpoContactBinding
 import com.example.jobapp_u.home.adapter.TpoAdapter
 import com.example.jobapp_u.home.viewmodel.UserEditViewModel
+import com.example.jobapp_u.model.Tpo
+import com.example.jobapp_u.util.AesService
 
 class UserTpoContact : Fragment() {
     private var _binding : FragmentUserTpoContactBinding? = null
@@ -18,6 +23,9 @@ class UserTpoContact : Fragment() {
     private var _tpoAdapter : TpoAdapter? = null
     private val tpoAdapter get() = _tpoAdapter!!
     private val userEditViewModel by viewModels<UserEditViewModel>()
+    private val aesService: AesService = AesService()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,9 +49,19 @@ class UserTpoContact : Fragment() {
         binding.rvContactTPO.layoutManager = LinearLayoutManager(requireContext())
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupObserver() {
         userEditViewModel.tpoList.observe(viewLifecycleOwner){ tpoList ->
-            tpoAdapter.setData(tpoList)
+            val list = tpoList.map { tpo: Tpo ->
+                tpo.copy(
+                    username = if (aesService.isDecryptionSuccessful(tpo.username)) {
+                        aesService.decryptFieldData(tpo.username)
+                    } else {
+                        tpo.username
+                    }
+                )
+            }
+            tpoAdapter.setData(list)
         }
     }
 

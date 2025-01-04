@@ -1,6 +1,8 @@
 package com.example.jobapp_u.user_detail.viewmodel
 
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +14,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
 import com.example.jobapp_u.model.Student
+import com.example.jobapp_u.util.AesService
 import com.example.jobapp_u.util.Constants.Companion.COLLECTION_PATH_STUDENT
 import com.example.jobapp_u.util.Constants.Companion.PROFILE_IMAGE_PATH
 import com.example.jobapp_u.util.Constants.Companion.RESUME_PATH
@@ -31,6 +34,7 @@ class UserDetailViewModel : ViewModel() {
     private val mStorage: StorageReference by lazy { FirebaseStorage.getInstance().reference }
     private val mFirestore: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
     private val mAuth : FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val aesService: AesService = AesService()
 
     fun setPdfUri(pdfUri: Uri?) {
         this.pdfUri = pdfUri
@@ -51,6 +55,7 @@ class UserDetailViewModel : ViewModel() {
     private val _uploadStudent: MutableLiveData<Resource<String>> = MutableLiveData()
     val uploadStudent: LiveData<Resource<String>> = _uploadStudent
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadStudentData(
         pdfUri: Uri,
         imageUri: Uri,
@@ -68,11 +73,11 @@ class UserDetailViewModel : ViewModel() {
 
                 val resumePath = "$RESUME_PATH/$studentId"
                 val resumeUrl = uploadData(resumePath, pdfUri, metaData)
-                student.academic?.resumeUrl = resumeUrl
+                student.academic?.resumeUrl = aesService.encryptFieldData(resumeUrl)
 
                 val imagePath = "$PROFILE_IMAGE_PATH/$studentId"
                 val imageUrl = uploadData(imagePath, imageUri, null)
-                student.details?.imageUrl = imageUrl
+                student.details?.imageUrl = aesService.encryptFieldData(imageUrl)
 
                 val userProfileBuilder = UserProfileChangeRequest.Builder()
                 val userProfile = userProfileBuilder

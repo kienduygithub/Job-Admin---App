@@ -83,7 +83,7 @@ class AesService {
             decryptFieldData(encryptedData)
             true
         } catch (e: Exception) {
-            e.printStackTrace() // Ghi log lỗi nếu cần
+            e.printStackTrace()
             false
         }
     }

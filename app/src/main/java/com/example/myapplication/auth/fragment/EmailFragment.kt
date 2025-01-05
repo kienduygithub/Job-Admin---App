@@ -103,7 +103,7 @@ class EmailFragment : Fragment() {
 
                 if(generateOTP == otp.toString()){
                     authViewModel.resendPassword(email.toString());
-                    Toast.makeText(requireContext(), "Yêu cầu đặt lại mật khẩu mới đã được gửi đến mail. Đổi mật khẩu mới để đăng nhập", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Chính xác. Di chuyển đển tài khoản mail để đổi mật khẩu mới", Toast.LENGTH_SHORT).show()
                     findNavController().popBackStack(R.id.loginFragment, false)
                 }else{
                     Toast.makeText(requireContext(), "Mã xác thực không chính xác", Toast.LENGTH_SHORT).show()

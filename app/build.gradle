@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.example.jobapp_u'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.jobapp_u"
@@ -92,4 +92,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottie_version"
     implementation "com.github.ibrahimsn98:SmoothBottomBar:$smooth_bottom_bar_version"
     implementation "io.coil-kt:coil:$coil_version"
+
+    //biometric
+    implementation "androidx.biometric:biometric-ktx:1.4.0-alpha02"
 }

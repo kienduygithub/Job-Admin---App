@@ -1,8 +1,10 @@
 package com.example.myapplication.auth.fragment
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -12,7 +14,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,16 +36,29 @@ import com.example.myapplication.util.Status.*
 import com.example.myapplication.util.Constants.Companion.ROLE_TYPE_ADMIN
 import com.example.myapplication.util.Constants.Companion.ROLE_TYPE_TPO
 import com.example.myapplication.util.showToast
+import java.util.concurrent.Executor
 
 
 private const val TAG = "LoginFragmentTAG"
 class LoginFragment : Fragment() {
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private var sharedPreferences: SharedPreferences? = null
+
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<LoginFragmentArgs>()
     private val authViewModel by viewModels<AuthViewModel>()
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
     private val aesService: AesService = AesService()
+    private var emailText = ""
+    private var passwordText = ""
+
+    companion object {
+        private const val REQUEST_CODE = 1001
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +66,79 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        sharedPreferences = requireContext().getSharedPreferences("data", android.content.Context.MODE_PRIVATE)
 
+        setupBiometricAuthentication()
         setupUI()
         setupObserver()
 
+        checkLoginStatus()
+
         return binding.root
+    }
+
+    private fun checkLoginStatus() {
+        sharedPreferences?.let {
+            val isLogin: Boolean = it.getBoolean("isLogin", false)
+            if (isLogin) {
+                binding.imageViewLogin.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setupBiometricAuthentication() {
+        val biometricManager = BiometricManager.from(requireContext())
+        when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
+            BiometricManager.BIOMETRIC_SUCCESS -> Log.d("MY_APP_TAG", "App can authenticate using biometrics.")
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> Log.e("MY_APP_TAG", "No biometric features available on this device.")
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> Log.e("MY_APP_TAG", "Biometric features are currently unavailable.")
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                    putExtra(
+                        Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                        BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                    )
+                }
+                startActivityForResult(enrollIntent, REQUEST_CODE)
+            }
+        }
+
+        executor = ContextCompat.getMainExecutor(requireContext())
+        biometricPrompt = BiometricPrompt(this, executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(requireContext(), "Authentication error: $errString", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    sharedPreferences?.let {
+                        val email = it.getString("email", "")
+                        val password = it.getString("password", "")
+                        if(detailVerification(email!!, password!!)){
+                            authViewModel.login(email, password)
+                            clearField()
+                        }
+                    }
+                }
+
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric login for my app")
+            .setSubtitle("Log in using your biometric credential")
+            .setNegativeButtonText("Use account password")
+            .build()
+
+        binding.imageViewLogin.setOnClickListener {
+            biometricPrompt.authenticate(promptInfo)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -73,10 +159,18 @@ class LoginFragment : Fragment() {
                 val password = etPassword.getInputValue()
                 if (detailVerification(email, password)) {
                     authViewModel.login(email, password)
-                    clearField()
+                    emailText = email
+                    passwordText = password
                 }
             }
         }
+    }
+
+    private fun performAuth(email: String, password: String){
+        val editor :SharedPreferences.Editor = sharedPreferences!!.edit()
+        editor.putString("email", email)
+        editor.putString("password", password)
+        editor.commit()
     }
 
     private fun setupObserver() {
@@ -92,9 +186,31 @@ class LoginFragment : Fragment() {
                         if (user.userInfoExist.not() && user.roleType == ROLE_TYPE_TPO) {
                             navigateToUserDetail(username = user.username, email = user.email)
                         } else if (user.userInfoExist && user.roleType == ROLE_TYPE_TPO) {
-                            navigateToHomeActivity(roleType = user.roleType,)
+                            navigateToHomeActivity(roleType = user.roleType)
+                            if(emailText == "" || passwordText == ""){
+                                sharedPreferences?.let {
+                                    val email = it.getString("email", "")
+                                    val password = it.getString("password", "")
+                                    if(detailVerification(email.toString(), password.toString())){
+                                        performAuth(email!!, password!!)
+                                    }
+                                }
+                            }else{
+                                performAuth(emailText, passwordText)
+                            }
                         } else if (user.roleType == ROLE_TYPE_ADMIN) {
                             navigateToHomeActivity(roleType = user.roleType)
+                            if(emailText == "" || passwordText == ""){
+                                sharedPreferences?.let {
+                                    val email = it.getString("email", "")
+                                    val password = it.getString("password", "")
+                                    if(detailVerification(email.toString(), password.toString())){
+                                        performAuth(email!!, password!!)
+                                    }
+                                }
+                            }else{
+                                performAuth(emailText, passwordText)
+                            }
                         }
                     } else {
                         showToast(requireContext(), "Account doesn't exist")

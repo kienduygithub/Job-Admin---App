@@ -56,6 +56,74 @@
             android:padding="@dimen/medium_padding"
             android:src="@drawable/ic_check_email" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/otpET1"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/otpET2"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/otpET3"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/otpET4"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:background="@drawable/round_back_dark_blue5_15"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:maxLength="1"/>
+        </LinearLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnOpenEmail"
             android:layout_width="match_parent"
@@ -65,7 +133,7 @@
             android:backgroundTint="@color/button_color"
             android:fontFamily="@font/dm_sans_medium"
             android:padding="@dimen/button_padding"
-            android:text="@string/field_open_email"
+            android:text="@string/auth_otp"
             android:textColor="@color/button_text_color"
             android:textSize="16sp"
             app:cornerRadius="6dp"
@@ -93,9 +161,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/email_resend_prompt"
+            android:text="@string/not_receive_otp"
             android:textColor="@color/text_color"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvResendOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/resend"
+            android:textColor="@color/on_boarding_span_text_color"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 

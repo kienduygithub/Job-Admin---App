@@ -127,5 +127,8 @@
     <string name="mock_test_navigation">1. Select the option and the answer will be saved once you click on the submit button.\n\n2. Once you click on the submit button, you cannot change the answer and the solution will be displayed on the bottom.\n\n3. To go onto the next question, slide towards left.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="auth_otp">Xác thực</string>
+    <string name="resend">Gửi lại</string>
+    <string name="not_receive_otp">Bạn chưa nhận được mã OTP ?</string>
 
 </resources>

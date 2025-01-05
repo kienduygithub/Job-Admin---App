@@ -30,6 +30,8 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 play-services-cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "playServicesCastFramework" }
+android-mail = { group = "com.sun.mail", name = "android-mail", version = "1.6.7" }
+android-activation = { group = "com.sun.mail", name = "android-activation", version = "1.6.7" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

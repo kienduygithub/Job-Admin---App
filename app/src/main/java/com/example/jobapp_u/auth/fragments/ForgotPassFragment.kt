@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.jobapp_u.R
 import com.example.jobapp_u.util.InputValidation
 import com.example.jobapp_u.util.LoadingDialog
 import com.example.jobapp_u.util.showToast
@@ -14,6 +15,7 @@ import com.example.jobapp_u.auth.viewmodel.AuthViewModel
 import com.example.jobapp_u.databinding.FragmentForgotPassBinding
 import com.example.jobapp_u.util.*
 import com.example.jobapp_u.util.Status.*
+import java.util.Random
 
 private const val TAG = "FORGOT_PASSWORD"
 
@@ -23,6 +25,8 @@ class ForgotPassFragment : Fragment() {
 
     private val authViewModel by viewModels<AuthViewModel>()
     private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
+    private val mailService: MailService = MailService();
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,9 +70,20 @@ class ForgotPassFragment : Fragment() {
             btnResetPassword.setOnClickListener {
                 val email = etEmail.getInputValue()
                 val (isEmailValid, emailError) = InputValidation.isEmailValid(email)
-                if (isEmailValid.not()) {
-                    authViewModel.resendPassword(email)
-                    clearField()
+                if (!isEmailValid.not()) {
+                    randomOtp();
+                    mailService.sendEmail(
+                        "Đặt lại mật khẩu",
+                        "Mã OTP của bạn là: $_random",
+                        email
+                    )
+
+                    val bundle = Bundle().apply {
+                        putString("email", email)
+                        putString("otp", _random) // Truyền mã OTP
+                    }
+
+                    findNavController().navigate(R.id.action_forgotPassFragment_to_emailFragment, bundle)
                 } else {
                     etEmailContainer.error = emailError
                 }
@@ -76,8 +91,11 @@ class ForgotPassFragment : Fragment() {
         }
     }
 
-    private fun clearField() {
-        binding.etEmail.clearText()
+    var _random: String = ""
+    private fun randomOtp(){
+        val random: Random = Random();
+        val randomNumber: Int = 1000 + random.nextInt(9000);
+        _random = randomNumber.toString();
     }
 
     override fun onDestroy() {

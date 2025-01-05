@@ -84,6 +84,7 @@ class ProfileViewModel : ViewModel() {
                val editUserRef = mFirestore.collection(COLLECTION_PATH_TPO).document(tpo.uid)
                tpo.username = aesService.encryptFieldData(tpo.username)
                tpo.mobile = aesService.encryptFieldData(tpo.mobile)
+               tpo.imageUri = aesService.encryptFieldData(tpo.imageUri)
                editUserRef.set(tpo).await()
 
                _updateStatus.postValue(UiState.SUCCESS)

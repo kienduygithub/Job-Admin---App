@@ -38,6 +38,7 @@ class ProfileEditFragment : Fragment() {
     private val profileViewModel by viewModels<ProfileViewModel>()
     private val loadingDialog by lazy { LoadingDialog(requireContext()) }
     private val aesService: AesService = AesService()
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +51,7 @@ class ProfileEditFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupUI() {
         with(binding) {
-            profileImage.load(args.tpo.imageUri)
+            profileImage.load(aesService.decryptFieldData(args.tpo.imageUri))
             etUsername.setText(aesService.decryptFieldData(args.tpo.username))
             etEmail.setText(args.tpo.email)
             etMobile.setText(aesService.decryptFieldData(args.tpo.mobile))
@@ -75,7 +76,7 @@ class ProfileEditFragment : Fragment() {
                 val username = etUsername.getInputValue()
                 val email = etEmail.getInputValue()
                 val mobile = etMobile.getInputValue()
-                val imageUrl = profileViewModel.getImageUri() ?: Uri.parse(args.tpo.imageUri)
+                val imageUrl = profileViewModel.getImageUri() ?: Uri.parse(aesService.decryptFieldData(args.tpo.imageUri))
                 if (detailVerification(imageUrl, username, email, mobile)) {
                     args.tpo.username = username
                     args.tpo.email = email

@@ -1,11 +1,14 @@
 package com.example.myapplication.auth.viewmodel
 
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.Tpo
+import com.example.myapplication.util.AesService
 import com.example.myapplication.util.Constants.Companion.COLLECTION_PATH_TPO
 import com.example.myapplication.util.Constants.Companion.TPO_IMAGE_STORAGE_PATH
 import com.example.myapplication.util.Resource
@@ -25,6 +28,7 @@ class UserDetailViewModel : ViewModel() {
 
     private val _userUploadStatus: MutableLiveData<Resource<String>> = MutableLiveData()
     val userUploadStatus: LiveData<Resource<String>> = _userUploadStatus
+    private val aesService: AesService = AesService()
 
     fun setImageUri(imageUri: Uri?) {
         this.imageUri = imageUri
@@ -34,6 +38,7 @@ class UserDetailViewModel : ViewModel() {
         return this.imageUri
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadUserDetail(imageUri: Uri, tpo: Tpo) {
         viewModelScope.launch(IO) {
             try {
@@ -50,7 +55,7 @@ class UserDetailViewModel : ViewModel() {
                 val profileRef = mStorage.reference.child(imagePath)
                 profileRef.putFile(imageUri).await()
                 val imageUrl = profileRef.downloadUrl.await().toString()
-                tpo.imageUri = imageUrl
+                tpo.imageUri = aesService.encryptFieldData(imageUrl)
 
                 val tpoRef = mFirestore.collection(COLLECTION_PATH_TPO).document(userId)
                 tpoRef.set(tpo).await()

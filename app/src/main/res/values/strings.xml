@@ -4,7 +4,7 @@
     <string name="on_boarding_sub_heading">Hỗ trợ sinh viên tìm được những vai trò công việc thú vị nhất dựa trên sở thích và chuyên ngành học của bản thân.</string>
 
     <string name="role_select_heading">Lựa chọn vai trò</string>
-    <string name="role_select_sub_heading">Giúp sinh viên sẵn sàng cho cuộc sống, không chỉ sẵn sàng cho ngành nghề. </string>
+    <string name="role_select_sub_heading">Giúp ứng viên sẵn sàng cho cuộc sống, không chỉ sẵn sàng cho ngành nghề. </string>
     <string name="role_admin_heading">Admin</string>
     <string name="role_tpo_heading">Tpo</string>
 
@@ -20,7 +20,7 @@
     <string name="fragment_jobs_record_heading">Thông tin</string>
     <string name="fragment_job_detail_heading">Thêm công việc</string>
     <string name="bottom_sheet_heading">Xóa công việc</string>
-    <string name="bottom_sheet_sub_heading">Bạn có chắc muốn xóa công việc này?</string>
+    <string name="bottom_sheet_sub_heading">Bạn có chắc muốn xóa công việc này ?</string>
     <string name="fragment_mock_test_heading">Tạo bài thi thử</string>
     <string name="fragment_mock_test_sub_heading">Bài thi thử</string>
     <string name="field_test_conducted">Bài thi đã được thực hiện</string>
@@ -62,27 +62,27 @@
     <string name="field_company_and_location">\u2022 %s \u2022 %s \u2022</string>
     <string name="field_welcome_heading">%s \n%s</string>
     <string name="field_administer_heading">Quản trị viên</string>
-    <string name="field_student_card_title">Học sinh</string>
+    <string name="field_student_card_title">Ứng viên</string>
     <string name="field_jobs_card_title">Công việc</string>
     <string name="field_mock_test_card_title">Bài thi thử</string>
     <string name="field_alert_card_title">Cảnh báo</string>
     <string name="field_quiz_title">Tiêu đề câu hỏi</string>
     <string name="question_count">Câu hỏi %d</string>
     <string name="field_remove_mock_heading">Xóa bài thi thử</string>
-    <string name="field_remove_quiz_sub_heading">Bạn có chắc muốn xóa bài thi thử này không?</string>
+    <string name="field_remove_quiz_sub_heading">Bạn có chắc muốn xóa bài thi thử này không ?</string>
     <string name="field_remove_quiz_btn">Xóa bài thi thử</string>
     <string name="field_quiz_student_count"> %d người đăng ký</string>
 
-    <string name="heading_student_applied">Sinh viên ứng tuyển</string>
+    <string name="heading_student_applied">Ứng viên</string>
     <string name="student_count"> %s </string>
     <string name="header_job_description">Mô tả công việc</string>
     <string name="header_salary">Thu nhập</string>
     <string name="header_responsibilities">Yêu cầu</string>
     <string name="header_skill_set">Kỹ năng yêu cầu</string>
 
-    <string name="login_prompt">Đã có tài khoản? Đăng nhập</string>
+    <string name="login_prompt">Đã có tài khoản ? Đăng nhập</string>
     <string name="sign_up_prompt">Bạn chưa có tài khoản? Đăng ký</string>
-    <string name="email_resend_prompt">Bạn chưa nhận được email? Gửi lại</string>
+    <string name="email_resend_prompt">Bạn chưa nhận được email ? Gửi lại</string>
 
     <string name="auth_pass">Xác thực thành công</string>
     <string name="auth_fail">Xác thực thất bại</string>
@@ -154,7 +154,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="field_authenticate">Xác thực</string>
-    <string name="not_receive_otp">Bạn chưa nhận được mã OTP?</string>
+    <string name="not_receive_otp">Bạn chưa nhận được mã OTP ?</string>
     <string name="resend">Gửi lại</string>
 
 </resources>

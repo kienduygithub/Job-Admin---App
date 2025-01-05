@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dm_sans_bold"
             android:paddingVertical="@dimen/small_padding"
-            android:text="Edit Details"
+            android:text="Thông tin chi tiết"
             android:textColor="@color/text_color"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@id/ivPopOut"

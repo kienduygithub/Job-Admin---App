@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/large_margin"
         android:fontFamily="@font/dm_sans_bold"
-        android:text="Logout"
+        android:text="Đăng xuất"
         android:textColor="@color/bottom_sheet_text_color"
         android:textSize="22sp" />
 
@@ -31,7 +31,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/small_margin"
         android:fontFamily="@font/dm_sans_regular"
-        android:text="Are you sure you want to logout?"
+        android:text="Bạn có chắc muốn đăng xuất?"
         android:textColor="@color/bottom_sheet_sub_text"
         android:textSize="14sp" />
 
@@ -57,7 +57,7 @@
         android:layout_marginHorizontal="@dimen/medium_margin"
         android:fontFamily="@font/dm_sans_medium"
         android:padding="@dimen/button_padding"
-        android:text="Logout"
+        android:text="ĐĂNG XUẤT"
         android:textColor="@color/bottom_sheet_text_color"
         android:textSize="16sp"
         app:cornerRadius="6dp"

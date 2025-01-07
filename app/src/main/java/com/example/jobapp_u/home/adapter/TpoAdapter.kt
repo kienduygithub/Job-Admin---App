@@ -8,19 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.jobapp_u.databinding.TpoCardLayoutBinding
 import com.example.jobapp_u.model.Tpo
+import com.example.jobapp_u.util.AesService
 
 class TpoAdapter : RecyclerView.Adapter<TpoAdapter.TpoViewHolder>() {
 
     private val tpoList: MutableList<Tpo> = mutableListOf()
+    private val aesService: AesService = AesService()
 
     inner class TpoViewHolder(
         private val binding: TpoCardLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(tpo: Tpo) {
-            binding.ivProfileTpo.load(tpo.imageUri)
-            binding.tvTpoName.text = tpo.username
-            binding.tvTpoEmail.text = tpo.email
+            binding.ivProfileTpo.load(aesService.decryptFieldData(tpo.imageUri))
+            binding.tvTpoName.text = aesService.decryptFieldData(tpo.username)
+            binding.tvTpoEmail.text = aesService.decryptFieldData(tpo.email)
         }
     }
 

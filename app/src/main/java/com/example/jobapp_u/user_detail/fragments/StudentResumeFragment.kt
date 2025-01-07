@@ -49,6 +49,7 @@ class StudentResumeFragment : Fragment() {
         }
     private val loadingDialog : LoadingDialog by lazy { LoadingDialog(requireContext()) }
     private val aesService: AesService = AesService()
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

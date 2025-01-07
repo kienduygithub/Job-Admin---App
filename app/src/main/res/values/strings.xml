@@ -6,7 +6,7 @@
     <string name="login_fragment_sub_heading">Hãy Đăng Nhập. Điền thông tin của bạn để ứng tuyển vào các công việc!</string>
     <string name="signup_fragment_heading">Tạo Tài Khoản</string>
     <string name="signup_fragment_sub_heading">Let’s Signup. Fill in your details to apply for jobs!</string>
-    <string name="forget_pass_fragment_sub_heading">To reset your password, you need your email or mobile number that can be authenticated</string>
+    <string name="forget_pass_fragment_sub_heading">Nhập email để nhận mã xác thực OTP reset mật khẩu</string>
     <string name="email_fragment_heading">Check Your Email</string>
     <string name="email_fragment_sub_heading">We have sent the reset password to the email address brandonelouis@gmial.com</string>
     <string name="student_detail_fragment_heading">Thêm thông tin</string>
@@ -57,7 +57,7 @@
     <string name="field_sem_4">Kì 4</string>
     <string name="field_avg_sem">Trung bình SGPI</string>
     <string name="field_company_and_location">%s \u2022 %s</string>
-    <string name="heading_student_applied">Sinh viên đăng ký</string>
+    <string name="heading_student_applied">Ứng viên đăng ký</string>
     <string name="student_count"> %s </string>
     <string name="header_job_description">Mô tả công việc</string>
     <string name="header_salary">Thu nhập</string>
@@ -99,7 +99,7 @@
     <string name="field_error_job_applied">Job application failed</string>
 
     <string name="resume_meta_data">%1$s Mb · %2$s</string>
-    <string name="resume_guideline">Upload files in PDF format up to 5 MB. Just upload it once and you can use it in your next application.</string>
+    <string name="resume_guideline">Tải lên các tệp định dạng PDF dung lượng tối đa 5 MB. Chỉ cần tải lên một lần và bạn có thể sử dụng lại trong lần ứng dụng tiếp theo..</string>
     <string name="bottom_sheet_button_text">Không</string>
     <string name="button_submit_text">Nộp</string>
     <string name="field_welcome_text">Xin chào \n%s</string>
@@ -110,9 +110,9 @@
     <string name="home_fragment_job_list">Danh sách công việc mới nhất</string>
     <string name="field_value_count">%s!</string>
 
-    <string name="invalid_credentials">Invalid email or password</string>
-    <string name="invalid_user">The specified user does not exist</string>
-    <string name="network_error">A network error occurred</string>
+    <string name="invalid_credentials">Email hoặc mật khẩu không chính xác</string>
+    <string name="invalid_user">Người dùng không tồn tại</string>
+    <string name="network_error">Lỗi đường truyền</string>
 
     <string name="loading">Đang tải</string>
     <string name="completed">Hoàn thành</string>
